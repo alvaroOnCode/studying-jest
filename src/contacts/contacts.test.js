@@ -75,4 +75,21 @@ describe('contacts', () => {
       expect(current).toEqual(expected)
     })
   })
+
+  // Tests | Getting data from API
+  describe('From API', () => {
+    // 1️⃣
+    test('Pass if users exist', async () => {
+      const url = "https://jsonplaceholder.typicode.com/users";
+      const count = await contacts.getFromJSONPlaceholder(url);
+      expect(count).toBeGreaterThan(0);
+    })
+
+    // 2️⃣
+    test("Pass if input url is wrong", async () => {
+      const url = "https://jsonplaceholder.typicode.com/uusseerrss";
+      const count = contacts.getFromJSONPlaceholder(url);
+      await expect(count).rejects.toMatch('Not Found');
+    })
+  })
 })

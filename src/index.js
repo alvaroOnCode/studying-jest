@@ -1,1 +1,3 @@
-import { xmlhttprequest } from "../utils/xmlhttprequest";
+/**
+ * Index
+ */

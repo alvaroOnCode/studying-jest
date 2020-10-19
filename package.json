@@ -4,6 +4,7 @@
   "description": "First steps with Jest.",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint -c .eslintrc src/**/*.{js,json}",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -17,5 +18,10 @@
     "@babel/preset-env": "^7.11.5",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.2"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.11.5",
+    "eslint": "^7.11.0",
+    "eslint-plugin-jest": "^24.1.0"
   }
 }

@@ -1,16 +1,24 @@
+import { xmlhttprequest as xhr } from "../utils/xmlhttprequest";
+
 let contacts = [];
 
 export default {
   get() {
     return [...contacts];
   },
+
   add(contact) {
-    if (contact.hasOwnProperty("name") && contact.hasOwnProperty("email") && contact.hasOwnProperty("id")) {
+    const hasName = Object.prototype.hasOwnProperty.call(contact, "name");
+    const hasEmail = Object.prototype.hasOwnProperty.call(contact, "email");
+    const hasId = Object.prototype.hasOwnProperty.call(contact, "id");
+
+    if (hasName && hasEmail && hasId) {
       contacts.push(contact);
     } else {
       throw "⛔ Invalid format.";
     }
   },
+
   delete(contactId) {
     const index = contacts.findIndex((c) => c.id === contactId);
 
@@ -18,30 +26,24 @@ export default {
       contacts.splice(index, 1);
     }
   },
+
   reset() {
     contacts = [];
   },
-  getFromJSONPlaceholder() {
-    const url = "https://jsonplaceholder.typicode.com/users";
 
+  getFromJSONPlaceholder(url) {
     return new Promise((resolve, reject) => {
-      // Check Wedding Id in local storage
-      if (!localStorage.weddingId) {
-        reject("Wedding ID in localStorage not found!");
-      }
-
       // Request
       xhr({
         method: "GET",
         url,
         async: true,
-        credentials: true,
         headers: {
           Accept: "application/json",
         },
       })
         .then((data) => {
-          resolve(data);
+          resolve(data.length);
         })
         .catch((error) => {
           reject(error);
